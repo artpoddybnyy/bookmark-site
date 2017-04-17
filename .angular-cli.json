@@ -1,12 +1,12 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+ "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
     "name": "bookmarks-site"
   },
   "apps": [
     {
-      "root": "src\main\webapp",
-      "outDir": "dist",
+      "root": "src/main/webapp",
+      "outDir": "target/www",
       "assets": [
         "assets",
         "favicon.ico"
@@ -36,10 +36,10 @@
   },
   "lint": [
     {
-      "project": "src\main\webapp/tsconfig.app.json"
+      "project": "src/main/webapp/tsconfig.app.json"
     },
     {
-      "project": "src\main\webapp/tsconfig.spec.json"
+      "project": "src/main/webapp/tsconfig.spec.json"
     },
     {
       "project": "e2e/tsconfig.e2e.json"

@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import {BookMarkService} from "./bookmark/bookmark.service";
+
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    moduleId: module.id,
+    selector: 'app',
+    templateUrl: 'app.component.html',
+    providers: [BookMarkService]
+
 })
-export class AppComponent {
-  title = 'app works!';
-}
+
+export class AppComponent {}
