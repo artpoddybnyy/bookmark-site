@@ -3,6 +3,9 @@ import {BookMark} from "../bookmark-list/bookmark.module";
 import {BookMarkService} from "../bookmark.service";
 import {BookMarkComponent} from "../bookmark-list/bookmark.component";
 
+import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
+
+
 @Component({
   selector: "create-bookmark",
     templateUrl: "bookmark-create.component.html"

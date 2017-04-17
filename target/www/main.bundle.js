@@ -76,7 +76,7 @@ var BookMarkService = (function () {
         return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].throw(errMessage);
     };
     BookMarkService = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["q" /* Injectable */])(), 
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* Http */]) === 'function' && _a) || Object])
     ], BookMarkService);
     return BookMarkService;
@@ -138,7 +138,7 @@ var BookMarkComponent = (function () {
         console.log(this.ids);
     };
     BookMarkComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Component */])({
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: "all-bookmarks",
             template: __webpack_require__(347)
         }), 
@@ -191,7 +191,7 @@ var BookMarkCreate = (function () {
         });
     };
     BookMarkCreate = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Component */])({
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: "create-bookmark",
             template: __webpack_require__(555)
         }), 
@@ -213,7 +213,14 @@ var BookMarkCreate = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bookmark_list_bookmark_component_html__ = __webpack_require__(347);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bookmark_list_bookmark_component_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__bookmark_list_bookmark_component_html__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__bookmark_service__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap_modal_index__ = __webpack_require__(905);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap_modal_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap_modal_index__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookMarkEdit; });
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -227,8 +234,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var BookMarkEdit = (function () {
-    function BookMarkEdit(bookMarkService, route, router) {
+
+var BookMarkEdit = (function (_super) {
+    __extends(BookMarkEdit, _super);
+    function BookMarkEdit(bookMarkService, route, router, dialogService) {
+        _super.call(this, dialogService);
         this.bookMarkService = bookMarkService;
         this.route = route;
         this.router = router;
@@ -236,6 +246,7 @@ var BookMarkEdit = (function () {
     BookMarkEdit.prototype.ngOnInit = function () {
         var id = this.route.snapshot.params['id'];
         this.findOne(id);
+        //this.showConfirm(id);
     };
     BookMarkEdit.prototype.findOne = function (id) {
         var _this = this;
@@ -245,20 +256,33 @@ var BookMarkEdit = (function () {
     };
     BookMarkEdit.prototype.updateBookMark = function () {
         var _this = this;
-        return this.bookMarkService.
-            updateBookMark(this.bookMark)
-            .subscribe(function (bookMark) { return _this.bookMark = bookMark; }, function (data) { _this.router.navigateByUrl('all-bookmarks'); return true; });
+        return this.bookMarkService.updateBookMark(this.bookMark)
+            .subscribe(function (bookMark) { return _this.bookMark = bookMark; }, function (data) {
+            _this.router.navigateByUrl('all-bookmarks');
+            return true;
+        });
+    };
+    BookMarkEdit.prototype.showConfirm = function (id) {
+        var disposable = this.dialogService.addDialog(BookMarkEdit, this.findOne(id))
+            .subscribe(function (isConfirmed) {
+            if (isConfirmed) {
+                alert('accepted');
+            }
+            else {
+                alert('declined');
+            }
+        });
     };
     BookMarkEdit = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Component */])({
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: "edit-bookmark",
             template: __webpack_require__(556),
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__bookmark_service__["a" /* BookMarkService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__bookmark_service__["a" /* BookMarkService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === 'function' && _c) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__bookmark_service__["a" /* BookMarkService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__bookmark_service__["a" /* BookMarkService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap_modal_index__["DialogService"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap_modal_index__["DialogService"]) === 'function' && _d) || Object])
     ], BookMarkEdit);
     return BookMarkEdit;
-    var _a, _b, _c;
-}());
+    var _a, _b, _c, _d;
+}(__WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap_modal_index__["DialogComponent"]));
 //# sourceMappingURL=bookmark-edit.component.js.map
 
 /***/ }),
@@ -266,7 +290,7 @@ var BookMarkEdit = (function () {
 /***/ 347:
 /***/ (function(module, exports) {
 
-module.exports = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>main page</title>\n</head>\n<body>\n\n<create-bookmark></create-bookmark>\n\n<div class=\"container\">\n  <div class=\"col-xs-4\">\n    <button type=\"button\" class=\"btn btn-danger\" href=\"/app/delete-bookmarks\"\n            (click)=\"deleteBookMarks()\">delete\n    </button>\n</div>\n</div>\n\n<div class=\"container\">\n  <div class=\"row\" *ngFor=\"let bookmark of bookMarks\">\n\n    <div class=\"col-sm-1 checkbox checkbox-danger\">\n      <input class=\"styled\" type=\"checkbox\" (change)=\"selected(bookmark.id)\"/>\n    </div>\n    <div class=\"col-md-6\">\n      <a href={{bookmark.link}}>{{bookmark.title}}</a>\n    </div>\n    <div class=\"col-md-2\">\n      {{bookmark.dateCreation | date}}\n    </div>\n    <div class=\"sm-1\">\n      <!--<a [routerLink]=\"['/one-bookmark', bookmark.id]\">edit</a>-->\n      <button type=\"submit\"\n              [routerLink]=\"['/', { outlets: { popup: 'one-bookmark/'+  bookmark.id} }]\"\n              replaceUrl=\"true\"\n              class=\"btn btn-primary btn-sm\">\n        <span class=\"fa fa-pencil\"></span>\n        <span class=\"hidden-md-down\" jhiTranslate=\"entity.action.edit\">Edit</span>\n      </button>\n\n    </div>\n    <div class=\"col-sm-2\">\n      <button type=\"button\" class=\"btn btn-danger\" href=\"/app/delete-bookmarks\"\n              (click)=\"deleteBookMarks(selected(bookmark.id))\">delete\n      </button>\n    </div>\n  </div>\n</div>\n</body>\n</html>\n"
+module.exports = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>main page</title>\n</head>\n<body>\n    <create-bookmark></create-bookmark>\n\n\n    <div class=\"container\">\n      <div class=\"col-xs-4\">\n        <button type=\"button\" class=\"btn btn-danger btn-sm\" href=\"/app/delete-bookmarks\"\n                (click)=\"deleteBookMarks()\">delete\n        </button>\n      </div>\n    </div>\n\n    <div class=\"container\">\n\n      <div class=\"row\" *ngFor=\"let bookmark of bookMarks\">\n        <div class=\"col-sm-1 checkbox checkbox-success\">\n          <input type=\"checkbox\" (change)=\"selected(bookmark.id)\"/>\n        </div>\n        <div class=\"col-md-7\">\n          <a href={{bookmark.link}}>{{bookmark.title}}</a>\n        </div>\n        <div class=\"col-md-2\">\n          {{bookmark.dateCreation | date}}\n        </div>\n        <div class=\"col-sm-1\">\n          <button type=\"submit\"\n                [routerLink]=\"['/one-bookmark', bookmark.id]\"\n                  replaceUrl=\"true\"\n                  class=\"btn btn-primary btn-sm\" data-toggle=\"modal\">\n            <span class=\"fa fa-pencil\"></span>\n            <span class=\"hidden-md-down\" jhiTranslate=\"entity.action.edit\">Edit</span>\n          </button>\n        </div>\n        <div class=\"col-sm-1\">\n          <button type=\"button\" class=\"btn btn-danger btn-sm\" href=\"/app/delete-bookmarks\"\n                  (click)=\"deleteBookMarks(selected(bookmark.id))\">delete\n          </button>\n        </div>\n      </div>\n   </div>\n</body>\n</html>\n"
 
 /***/ }),
 
@@ -298,7 +322,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["a" /* enableProdMode */])();
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["enableProdMode"])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */]);
 //# sourceMappingURL=main.js.map
@@ -310,7 +334,6 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bookmark_bookmark_service__ = __webpack_require__(148);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -322,15 +345,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
 var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Component */])({
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app',
             template: __webpack_require__(554),
-            providers: [__WEBPACK_IMPORTED_MODULE_1__bookmark_bookmark_service__["a" /* BookMarkService */]]
+            providers: []
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -353,6 +375,9 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__bookmark_bookmark_edit_bookmark_edit_component__ = __webpack_require__(335);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__bookmark_bookmark_list_bookmark_component__ = __webpack_require__(218);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__bookmark_bookmark_create_bookmark_create_component__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__bookmark_bookmark_service__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_bootstrap_modal_index__ = __webpack_require__(905);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_bootstrap_modal_index___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_ng2_bootstrap_modal_index__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -372,16 +397,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["b" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */], __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */], __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */], __WEBPACK_IMPORTED_MODULE_5__route__["a" /* routing */]],
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
+            imports: [__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_5__route__["a" /* routing */],
+                __WEBPACK_IMPORTED_MODULE_10_ng2_bootstrap_modal_index__["BootstrapModalModule"]],
             declarations: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__bookmark_bookmark_list_bookmark_component__["a" /* BookMarkComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__bookmark_bookmark_create_bookmark_create_component__["a" /* BookMarkCreate */],
-                __WEBPACK_IMPORTED_MODULE_6__bookmark_bookmark_edit_bookmark_edit_component__["a" /* BookMarkEdit */]],
+                __WEBPACK_IMPORTED_MODULE_6__bookmark_bookmark_edit_bookmark_edit_component__["a" /* BookMarkEdit */],
+            ],
+            providers: [__WEBPACK_IMPORTED_MODULE_9__bookmark_bookmark_service__["a" /* BookMarkService */]],
+            entryComponents: [__WEBPACK_IMPORTED_MODULE_6__bookmark_bookmark_edit_bookmark_edit_component__["a" /* BookMarkEdit */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
         }), 
         __metadata('design:paramtypes', [])
@@ -439,17 +473,13 @@ var routes = [
         component: __WEBPACK_IMPORTED_MODULE_3__bookmark_bookmark_create_bookmark_create_component__["a" /* BookMarkCreate */]
     },
     {
-        //path: 'one-bookmark',
-        //
-        //children: [
-        //    {
-        //        path: ':id',
-        //        component: BookMarkEdit,
-        //    }
-        //]
-        path: 'one-bookmark/:id',
-        component: __WEBPACK_IMPORTED_MODULE_1__bookmark_bookmark_edit_bookmark_edit_component__["a" /* BookMarkEdit */],
-        outlet: 'popup'
+        path: 'one-bookmark',
+        children: [
+            {
+                path: ':id',
+                component: __WEBPACK_IMPORTED_MODULE_1__bookmark_bookmark_edit_bookmark_edit_component__["a" /* BookMarkEdit */],
+            }
+        ]
     }
 ];
 var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["c" /* RouterModule */].forRoot(routes);
@@ -476,21 +506,21 @@ var environment = {
 /***/ 554:
 /***/ (function(module, exports) {
 
-module.exports = "\n<nav class=\"navbar navbar-inverse bg-inverse navbar navbar-toggleable-md\" >\n  <!--<div class=\"row\">-->\n  <a class=\"navbar-brand\" routerLink=\"/all-bookmarks\" >Bookmark Site</a>\n\n    <ul class=\"navbar-nav mr-auto mt-2 mt-md-0\">\n\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/all-bookmarks\">Main</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"https://github.com/artpoddybnyy/angular2-springboot-starter\">Some Link</a>\n      </li>\n\n    </ul>\n\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\">\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n<!--</div>-->\n</nav>\n\n\n<router-outlet></router-outlet>\n"
+module.exports = "\n<nav class=\"navbar navbar-inverse bg-inverse navbar navbar-toggleable-md\" >\n  <!--<div class=\"row\">-->\n  <a class=\"navbar-brand\" routerLink=\"/all-bookmarks\" >Bookmark Site</a>\n\n    <ul class=\"navbar-nav mr-auto mt-2 mt-md-0\">\n\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/all-bookmarks\">Main</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"https://github.com/artpoddybnyy/angular2-springboot-starter\">My GitHub</a>\n      </li>\n\n    </ul>\n\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\">\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n<!--</div>-->\n</nav>\n\n\n<router-outlet></router-outlet>\n<!--<router-outlet name=\"popup\"></router-outlet>-->\n\n<!--<edit-bookmark></edit-bookmark>-->\n"
 
 /***/ }),
 
 /***/ 555:
 /***/ (function(module, exports) {
 
-module.exports = "<br/>\n<div class=\"container\">\n<form class=\"row form-inline\">\n      <div class=\"row col-10\">\n      <input class=\"form-control col-10\" type=\"url\" placeholder=\"Enter URL https://example.com\"\n             id=\"link\" name=\"link\" #link=\"ngModel\" [(ngModel)]=\"bookMark.link\"/>\n\n         </div>\n  <button type=\"submit\" class=\"btn btn-outline-success my-2 my-sm-0\" (click)=\"createBookMark(bookMark)\" >Save</button>\n\n</form>\n</div>\n<br/>\n"
+module.exports = "<br/>\n<div class=\"container\">\n<form role=\"form\" class=\"form-inline\">\n      <div class=\"form-group col-10\">\n      <input class=\"form-control col-10\" type=\"url\" placeholder=\"Enter URL https://example.com\"\n             id=\"link\" name=\"link\" #link=\"ngModel\" [(ngModel)]=\"bookMark.link\"/>\n        <button type=\"submit\" class=\"btn btn-outline-success my-2 my-sm-2\" (click)=\"createBookMark(bookMark)\" >Save</button>\n      </div>\n</form>\n</div>\n<br/>\n\n\n"
 
 /***/ }),
 
 /***/ 556:
 /***/ (function(module, exports) {
 
-module.exports = "          <div *ngIf=\"bookMark\">\n\n            <h4 class=\"text-center\" >Update you BookMark</h4>\n\n            <form (ngSubmit)=\"updateBookMark()\">\n\n              <div class=\"form-group\">\n                <label for=\"title\">Title</label>\n                <input class=\"form-control\" type=\"text\" id=\"title\" title=\"title\" [(ngModel)]=\"bookMark.title\" name=\"title\">\n              </div>\n\n              <div class=\"form-group\">\n                <label for=\"link\" >Link</label>\n                <input class=\"form-control\" type=\"text\" id=\"link\" title=\"link\" [(ngModel)]=\"bookMark.link\" name=\"link\">\n              </div>\n              <button class=\"btn btn-success\" type=\"submit\">Update</button>\n            </form>\n\n          </div>\n\n"
+module.exports = "<div *ngIf=\"bookMark\" class=\"container\">\n  <div class=\"modal-dialog modal-lg\">\n  <div class=\"modal-content\">\n    <div class=\"modal-header\">\n      <button type=\"button\" class=\"close\" (click)=\"close()\" >&times;</button>\n            <h4 class=\"modal-title\" >Update you BookMark</h4>\n    </div>\n    <div class=\"modal-body\">\n            <form role=\"form\" (ngSubmit)=\"updateBookMark()\">\n\n              <div class=\"form-group\">\n                <label for=\"title\">Title</label>\n                <input class=\"form-control\" type=\"text\" id=\"title\" title=\"title\" [(ngModel)]=\"bookMark.title\" name=\"title\">\n              </div>\n\n              <div class=\"form-group\">\n                <label for=\"link\" >Link</label>\n                <input class=\"form-control\" type=\"text\" id=\"link\" title=\"link\" [(ngModel)]=\"bookMark.link\" name=\"link\">\n              </div>\n              <button class=\"btn btn-success\" type=\"submit\">Update</button>\n            </form>\n      </div>\n\n    <button type=\"button\" class=\"btn btn-default\" (click)=\"close()\" >Cancel</button>\n          </div>\n  </div>\n</div>\n\n<!--<div class=\"modal-dialog\">-->\n  <!--<div class=\"modal-content\">-->\n    <!--<div class=\"modal-header\">-->\n      <!--<button type=\"button\" class=\"close\" (click)=\"close()\" >&times;</button>-->\n      <!--<h4 class=\"modal-title\">{{title || 'Confirm'}}</h4>-->\n    <!--</div>-->\n    <!--<div class=\"modal-body\">-->\n      <!--<p>{{message || 'Are you sure?'}}</p>-->\n    <!--</div>-->\n    <!--<div class=\"modal-footer\">-->\n      <!--<button type=\"button\" class=\"btn btn-primary\" (click)=\"confirm()\">OK</button>-->\n      <!--<button type=\"button\" class=\"btn btn-default\" (click)=\"close()\" >Cancel</button>-->\n    <!--</div>-->\n  <!--</div>-->\n<!--</div>`-->\n"
 
 /***/ }),
 

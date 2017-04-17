@@ -5,46 +5,44 @@
   <title>main page</title>
 </head>
 <body>
+    <create-bookmark></create-bookmark>
 
-<create-bookmark></create-bookmark>
 
-<div class="container">
-  <div class="col-xs-4">
-    <button type="button" class="btn btn-danger" href="/app/delete-bookmarks"
-            (click)="deleteBookMarks()">delete
-    </button>
-</div>
-</div>
+    <div class="container">
+      <div class="col-xs-4">
+        <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
+                (click)="deleteBookMarks()">delete
+        </button>
+      </div>
+    </div>
 
-<div class="container">
-  <div class="row" *ngFor="let bookmark of bookMarks">
+    <div class="container">
 
-    <div class="col-sm-1 checkbox checkbox-danger">
-      <input class="styled" type="checkbox" (change)="selected(bookmark.id)"/>
-    </div>
-    <div class="col-md-6">
-      <a href={{bookmark.link}}>{{bookmark.title}}</a>
-    </div>
-    <div class="col-md-2">
-      {{bookmark.dateCreation | date}}
-    </div>
-    <div class="sm-1">
-      <!--<a [routerLink]="['/one-bookmark', bookmark.id]">edit</a>-->
-      <button type="submit"
-              [routerLink]="['/', { outlets: { popup: 'one-bookmark/'+  bookmark.id} }]"
-              replaceUrl="true"
-              class="btn btn-primary btn-sm">
-        <span class="fa fa-pencil"></span>
-        <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
-      </button>
-
-    </div>
-    <div class="col-sm-2">
-      <button type="button" class="btn btn-danger" href="/app/delete-bookmarks"
-              (click)="deleteBookMarks(selected(bookmark.id))">delete
-      </button>
-    </div>
-  </div>
-</div>
+      <div class="row" *ngFor="let bookmark of bookMarks">
+        <div class="col-sm-1 checkbox checkbox-success">
+          <input type="checkbox" (change)="selected(bookmark.id)"/>
+        </div>
+        <div class="col-md-7">
+          <a href={{bookmark.link}}>{{bookmark.title}}</a>
+        </div>
+        <div class="col-md-2">
+          {{bookmark.dateCreation | date}}
+        </div>
+        <div class="col-sm-1">
+          <button type="submit"
+                [routerLink]="['/one-bookmark', bookmark.id]"
+                  replaceUrl="true"
+                  class="btn btn-primary btn-sm" data-toggle="modal">
+            <span class="fa fa-pencil"></span>
+            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+          </button>
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
+                  (click)="deleteBookMarks(selected(bookmark.id))">delete
+          </button>
+        </div>
+      </div>
+   </div>
 </body>
 </html>

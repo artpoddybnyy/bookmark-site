@@ -20,17 +20,17 @@ export const routes: Routes = [
         component: BookMarkCreate
     },
     {
-        //path: 'one-bookmark',
-        //
-        //children: [
-        //    {
-        //        path: ':id',
-        //        component: BookMarkEdit,
-        //    }
-        //]
-      path: 'one-bookmark/:id',
-      component: BookMarkEdit,
-      outlet: 'popup'
+        path: 'one-bookmark',
+
+        children: [
+            {
+                path: ':id',
+                component: BookMarkEdit,
+            }
+        ]
+      //path: 'one-bookmark/:id',
+      //component: BookMarkDialogComponent,
+      //outlet: 'popup'
     }
 ];
 

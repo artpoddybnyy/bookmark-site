@@ -1,8 +1,12 @@
-          <div *ngIf="bookMark">
-
-            <h4 class="text-center" >Update you BookMark</h4>
-
-            <form (ngSubmit)="updateBookMark()">
+<div *ngIf="bookMark" class="container">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="close()" >&times;</button>
+            <h4 class="modal-title" >Update you BookMark</h4>
+    </div>
+    <div class="modal-body">
+            <form role="form" (ngSubmit)="updateBookMark()">
 
               <div class="form-group">
                 <label for="title">Title</label>
@@ -15,6 +19,25 @@
               </div>
               <button class="btn btn-success" type="submit">Update</button>
             </form>
+      </div>
 
+    <button type="button" class="btn btn-default" (click)="close()" >Cancel</button>
           </div>
+  </div>
+</div>
 
+<!--<div class="modal-dialog">-->
+  <!--<div class="modal-content">-->
+    <!--<div class="modal-header">-->
+      <!--<button type="button" class="close" (click)="close()" >&times;</button>-->
+      <!--<h4 class="modal-title">{{title || 'Confirm'}}</h4>-->
+    <!--</div>-->
+    <!--<div class="modal-body">-->
+      <!--<p>{{message || 'Are you sure?'}}</p>-->
+    <!--</div>-->
+    <!--<div class="modal-footer">-->
+      <!--<button type="button" class="btn btn-primary" (click)="confirm()">OK</button>-->
+      <!--<button type="button" class="btn btn-default" (click)="close()" >Cancel</button>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>`-->

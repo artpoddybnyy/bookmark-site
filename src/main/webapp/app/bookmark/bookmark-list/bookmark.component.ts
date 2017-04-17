@@ -6,7 +6,6 @@ import {BookMarkService} from "../bookmark.service";
 @Component({
   selector: "all-bookmarks",
   templateUrl: "bookmark.component.html"
-
 })
 
 export class BookMarkComponent implements OnInit {
@@ -49,5 +48,7 @@ export class BookMarkComponent implements OnInit {
     }
     console.log(this.ids);
   }
+
+
 
 }
