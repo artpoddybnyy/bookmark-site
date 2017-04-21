@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
+import {Component, OnInit, Output,EventEmitter} from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { EventManager } from 'ng-jhipster';
@@ -8,6 +8,7 @@ import {BookMarkService} from "../bookmark.service";
 import {BookMarkPopupService} from "../bookmark-edit-popup.service";
 import {BookMarkComponent} from "../bookmark-list/bookmark.component";
 
+
 @Component({
   selector: "edit-bookmark",
   templateUrl: "bookmark-edit.component.html",
@@ -15,6 +16,8 @@ import {BookMarkComponent} from "../bookmark-list/bookmark.component";
 export class BookMarkEdit implements OnInit {
 
   bookMark:BookMark;
+
+  @Output() updateComponent = new EventEmitter <any>();
 
 
   constructor(private bookMarkService:BookMarkService,
@@ -29,13 +32,19 @@ export class BookMarkEdit implements OnInit {
     return this.bookMarkService.updateBookMark(this.bookMark)
       .subscribe(bookMark => this.bookMark = bookMark,
         data => {
-          this.bookMarkComponent.findAll();
           //this.router.navigateByUrl('all-bookmarks');
-          //this.clear();
+          this.clear();
 
           return true;
         });
   }
+
+  sendEvent(){
+  this.updateComponent.emit(true);
+  }
+
+
+
 
   clear() {
     this.activeModal.dismiss('cancel');

@@ -22,7 +22,7 @@
             <input class="form-control" type="text" id="link" title="link" [(ngModel)]="bookMark.link" name="link">
           </div>
           <div class="modal-footer">
-          <button class="btn btn-success" type="submit" >Update</button>
+          <button class="btn btn-success" type="submit"  (click)="sendEvent()" >Update</button>
             <!--<button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">-->
               <!--<span class="fa fa-floppy-o"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>-->
             <!--</button>-->

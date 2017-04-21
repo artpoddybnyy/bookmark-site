@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {BookMark} from "./bookmark.module";
 import { Observable } from "rxjs/Observable";
 import {BookMarkService} from "../bookmark.service";
+import {BookMarkEdit} from "../bookmark-edit/bookmark-edit.component";
 
 @Component({
   selector: "all-bookmarks",
@@ -46,6 +47,8 @@ export class BookMarkComponent implements OnInit {
     }
   }
 
-
+  updateData(ane: boolean) {
+   if (ane)this.findAll();
+  }
 
 }

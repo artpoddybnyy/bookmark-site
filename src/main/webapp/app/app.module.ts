@@ -10,7 +10,7 @@ import {BookMarkCreate} from "./bookmark/bookmark-create/bookmark-create.compone
 import {BookMarkService} from "./bookmark/bookmark.service";
 import {BookMarkPopComponent} from "./bookmark/bookmark-edit/bookmrak-edit-popup.component";
 import {BookMarkPopupService} from "./bookmark/bookmark-edit-popup.service";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {EventManager} from "ng-jhipster/src/service/event-manager.service";
 
 
@@ -29,7 +29,7 @@ import {EventManager} from "ng-jhipster/src/service/event-manager.service";
   ],
   entryComponents: [BookMarkEdit
   ],
-  providers: [
+  providers: [ NgbActiveModal,
     BookMarkService, BookMarkPopupService, EventManager, BookMarkComponent],
   bootstrap: [AppComponent]
 })
