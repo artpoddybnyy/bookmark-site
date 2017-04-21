@@ -7,11 +7,10 @@
 <body>
     <create-bookmark></create-bookmark>
 
-
     <div class="container">
       <div class="col-xs-4">
         <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
-                (click)="deleteBookMarks()">delete
+                (click)="deleteBookMarks()"><i class="glyphicon glyphicon-trash"></i>
         </button>
       </div>
     </div>
@@ -30,19 +29,21 @@
         </div>
         <div class="col-sm-1">
           <button type="submit"
-                [routerLink]="['/one-bookmark', bookmark.id]"
+                  [routerLink]="['/', { outlets: { popup: 'one-bookmark/'+ bookmark.id} }]"
                   replaceUrl="true"
                   class="btn btn-primary btn-sm" data-toggle="modal">
-            <span class="fa fa-pencil"></span>
-            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+            <!--<span class="fa fa-pencil"></span>-->
+            <span class="hidden-md-down" jhiTranslate="entity.action.edit"><i class="glyphicon glyphicon-edit"></i></span>
           </button>
         </div>
         <div class="col-sm-1">
           <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
-                  (click)="deleteBookMarks(selected(bookmark.id))">delete
+                  (click)="deleteBookMarks(selected(bookmark.id))"><i class="glyphicon glyphicon-trash"></i>
           </button>
         </div>
+        <!--<span class="help-block">This is some help text...</span>-->
       </div>
    </div>
+
 </body>
 </html>

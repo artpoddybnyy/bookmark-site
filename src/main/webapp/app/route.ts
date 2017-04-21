@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {BookMarkEdit} from "./bookmark/bookmark-edit/bookmark-edit.component";
 import {BookMarkComponent} from "./bookmark/bookmark-list/bookmark.component";
 import {BookMarkCreate} from "./bookmark/bookmark-create/bookmark-create.component";
-
+import {BookMarkPopComponent} from "./bookmark/bookmark-edit/bookmrak-edit-popup.component";
 
 export const routes: Routes = [
     {
@@ -20,17 +20,9 @@ export const routes: Routes = [
         component: BookMarkCreate
     },
     {
-        path: 'one-bookmark',
-
-        children: [
-            {
-                path: ':id',
-                component: BookMarkEdit,
-            }
-        ]
-      //path: 'one-bookmark/:id',
-      //component: BookMarkDialogComponent,
-      //outlet: 'popup'
+      path: 'one-bookmark/:id',
+      component: BookMarkPopComponent,
+      outlet: 'popup'
     }
 ];
 

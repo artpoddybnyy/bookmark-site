@@ -1,13 +1,13 @@
-<br/>
+
 <div class="container">
-<form role="form" class="form-inline">
-      <div class="form-group col-10">
-      <input class="form-control col-10" type="url" placeholder="Enter URL https://example.com"
-             id="link" name="link" #link="ngModel" [(ngModel)]="bookMark.link"/>
-        <button type="submit" class="btn btn-outline-success my-2 my-sm-2" (click)="createBookMark(bookMark)" >Save</button>
-      </div>
-</form>
+
+  <form class="form-inline my-2 my-lg-0">
+    <input class="form-control col-8" type="url" placeholder="Enter URL https://example.com"
+           id="link" name="link" #link="ngModel" [(ngModel)]="bookMark.link"/>
+
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"(click)="createBookMark(bookMark)" >Save</button>
+  </form>
 </div>
-<br/>
+
 
 

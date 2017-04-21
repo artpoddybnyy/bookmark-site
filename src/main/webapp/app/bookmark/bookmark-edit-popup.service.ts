@@ -21,7 +21,7 @@ export class BookMarkPopupService {
     this.isOpen = true;
 
     if (id) {
-      this.bookMarkService.findOne(id).subscribe(bookmark => this.bookmarkModalRef(component, bookmark));
+    this.bookMarkService.findOne(id).subscribe(bookmark => this.bookmarkModalRef(component, bookmark));
     } else {
       return this.bookmarkModalRef(component, new BookMark());
     }

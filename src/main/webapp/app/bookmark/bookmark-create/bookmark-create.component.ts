@@ -3,9 +3,6 @@ import {BookMark} from "../bookmark-list/bookmark.module";
 import {BookMarkService} from "../bookmark.service";
 import {BookMarkComponent} from "../bookmark-list/bookmark.component";
 
-import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
-
-
 @Component({
   selector: "create-bookmark",
     templateUrl: "bookmark-create.component.html"
@@ -28,8 +25,11 @@ export class BookMarkCreate implements OnInit{
         return this.bookMarkService
             .create(bookMark)
             .subscribe(bookMark => this.bookMark = bookMark,
-                data => {this.bookMarkComponent.findAll();
-                  bookMark.link = null; return true});
+                data => {
+                  this.bookMarkComponent.findAll();
+                  bookMark.link = null;
+                  return true;
+                });
 
     }
 }

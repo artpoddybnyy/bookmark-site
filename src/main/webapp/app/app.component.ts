@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import {BookMarkService} from "./bookmark/bookmark.service";
+import {BookMarkComponent} from "./bookmark/bookmark-list/bookmark.component";
 
 @Component({
   selector: 'app',
@@ -7,6 +7,5 @@ import {BookMarkService} from "./bookmark/bookmark.service";
   providers: [ ]
 
 })
-
 export class AppComponent {
 }

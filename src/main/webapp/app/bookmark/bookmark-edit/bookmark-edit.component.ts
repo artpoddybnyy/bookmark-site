@@ -1,65 +1,46 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, OnDestroy} from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { EventManager } from 'ng-jhipster';
 import {BookMark} from "../bookmark-list/bookmark.module";
 import "../bookmark-list/bookmark.component.html";
 import {BookMarkService} from "../bookmark.service";
-import {DialogService, DialogComponent} from "ng2-bootstrap-modal/index";
-
+import {BookMarkPopupService} from "../bookmark-edit-popup.service";
+import {BookMarkComponent} from "../bookmark-list/bookmark.component";
 
 @Component({
   selector: "edit-bookmark",
   templateUrl: "bookmark-edit.component.html",
-
 })
+export class BookMarkEdit implements OnInit {
 
-export class BookMarkEdit extends DialogComponent<BookMark, boolean> implements OnInit {
-
-  private bookMark: BookMark;
+  bookMark:BookMark;
 
 
   constructor(private bookMarkService:BookMarkService,
-              private route:ActivatedRoute,
-              private router:Router,
-            dialogService: DialogService) {
-    super(dialogService);}
-
-
-
-  ngOnInit() {
-    let id = this.route.snapshot.params['id'];
-    this.findOne(id);
-    //this.showConfirm(id);
+              public activeModal:NgbActiveModal,
+              private bookMarkComponent:BookMarkComponent) {
   }
 
-
-  findOne(id:number):BookMark {
-    return this.bookMarkService
-      .findOne(id)
-      .subscribe(bookMark => this.bookMark = bookMark);
+  ngOnInit() {
   }
 
   updateBookMark() {
     return this.bookMarkService.updateBookMark(this.bookMark)
       .subscribe(bookMark => this.bookMark = bookMark,
         data => {
-          this.router.navigateByUrl('all-bookmarks');
-          return true
-        });
+          this.bookMarkComponent.findAll();
+          //this.router.navigateByUrl('all-bookmarks');
+          //this.clear();
 
+          return true;
+        });
   }
 
-
-  showConfirm(id: number) {
-    let disposable = this.dialogService.addDialog(BookMarkEdit,  this.findOne(id))
-      .subscribe((isConfirmed)=> {
-
-        if (isConfirmed) {
-          alert('accepted');
-        }
-        else {
-          alert('declined');
-        }
-      });
+  clear() {
+    this.activeModal.dismiss('cancel');
   }
 }
+
+
+

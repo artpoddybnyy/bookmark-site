@@ -1,28 +1,31 @@
-
-<nav class="navbar navbar-inverse bg-inverse navbar navbar-toggleable-md" >
+<nav class="navbar navbar-inverse bg-inverse navbar navbar-toggleable-md">
   <!--<div class="row">-->
-  <a class="navbar-brand" routerLink="/all-bookmarks" >Bookmark Site</a>
+  <a class="navbar-brand" routerLink="/all-bookmarks">Bookmark Site</a>
 
-    <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+  <ul class="navbar-nav mr-auto mt-2 mt-md-0">
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/all-bookmarks">Main</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="https://github.com/artpoddybnyy/angular2-springboot-starter">My GitHub</a>
-      </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/all-bookmarks">Main</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/artpoddybnyy/angular2-springboot-starter">My GitHub</a>
+    </li>
 
-    </ul>
+  </ul>
 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-<!--</div>-->
+  <form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+  </form>
+  <!--</div>-->
 </nav>
 
+<div class="container-fluid">
+  <div class="card">
+    <router-outlet></router-outlet>
 
-<router-outlet></router-outlet>
-<!--<router-outlet name="popup"></router-outlet>-->
+    <router-outlet name="popup"></router-outlet>
+  </div>
+  <template ngbModalContainer></template>
+</div>
 
-<!--<edit-bookmark></edit-bookmark>-->

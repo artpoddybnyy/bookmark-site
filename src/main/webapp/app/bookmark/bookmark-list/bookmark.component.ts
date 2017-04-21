@@ -35,8 +35,6 @@ export class BookMarkComponent implements OnInit {
           return true;
         });
     this.ids = [];
-    console.log(this.ids);
-
   }
 
   selected(id:number) {
@@ -46,7 +44,6 @@ export class BookMarkComponent implements OnInit {
     } else {
       this.ids.push(id);
     }
-    console.log(this.ids);
   }
 
 
