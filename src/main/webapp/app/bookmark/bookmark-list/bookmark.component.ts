@@ -3,6 +3,7 @@ import {BookMark} from "./bookmark.module";
 import { Observable } from "rxjs/Observable";
 import {BookMarkService} from "../bookmark.service";
 import {BookMarkEdit} from "../bookmark-edit/bookmark-edit.component";
+import { EventManager } from 'ng-jhipster';
 
 @Component({
   selector: "all-bookmarks",
@@ -14,11 +15,14 @@ export class BookMarkComponent implements OnInit {
   private ids:number[] = [];
   private bookMarks:Array<BookMark>;
 
-  constructor(private bookMarkService:BookMarkService) {
+  constructor(private bookMarkService:BookMarkService,
+              private eventManager: EventManager
+  ) {
   }
 
   ngOnInit() {
     this.findAll();
+    this.detectChangeInBookMark();
   }
 
   findAll():any {
@@ -26,7 +30,9 @@ export class BookMarkComponent implements OnInit {
       .findAll()
       .subscribe(bookMarks => this.bookMarks = bookMarks);
   }
-
+  detectChangeInBookMark() {
+    this.eventManager.subscribe('bookmarkListModification', (response) => this.findAll());
+  }
 
   deleteBookMarks() {
     this.bookMarkService.delete(this.ids)
@@ -46,9 +52,4 @@ export class BookMarkComponent implements OnInit {
       this.ids.push(id);
     }
   }
-
-  updateData(ane: boolean) {
-   if (ane)this.findAll();
-  }
-
 }

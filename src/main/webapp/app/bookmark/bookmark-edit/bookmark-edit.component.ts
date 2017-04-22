@@ -17,33 +17,40 @@ export class BookMarkEdit implements OnInit {
 
   bookMark:BookMark;
 
-  @Output() updateComponent = new EventEmitter <any>();
-
 
   constructor(private bookMarkService:BookMarkService,
               public activeModal:NgbActiveModal,
-              private bookMarkComponent:BookMarkComponent) {
+              private eventManager:EventManager) {
   }
 
   ngOnInit() {
+
   }
+
+  //updateBookMark() {
+  //  return this.bookMarkService.updateBookMark(this.bookMark)
+  //    .subscribe(bookMark => this.bookMark = bookMark,
+  //      data => {
+  //        //this.router.navigateByUrl('all-bookmarks');
+  //        this.clear();
+  //
+  //        return true;
+  //      });
+  //}
 
   updateBookMark() {
-    return this.bookMarkService.updateBookMark(this.bookMark)
+      this.bookMarkService.updateBookMark(this.bookMark)
       .subscribe(bookMark => this.bookMark = bookMark,
         data => {
-          //this.router.navigateByUrl('all-bookmarks');
-          this.clear();
-
-          return true;
+this.onSaveSuccess(); return true;
+          //this.clear();
         });
+      }
+
+  private onSaveSuccess() {
+    this.eventManager.broadcast({name: 'bookmarkListModification', content: 'OK' });
+    this.activeModal.dismiss('cancel');
   }
-
-  sendEvent(){
-  this.updateComponent.emit(true);
-  }
-
-
 
 
   clear() {
