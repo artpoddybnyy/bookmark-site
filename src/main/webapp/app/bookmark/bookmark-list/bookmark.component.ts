@@ -2,7 +2,6 @@ import {Component, OnInit} from "@angular/core";
 import {BookMark} from "./bookmark.module";
 import { Observable } from "rxjs/Observable";
 import {BookMarkService} from "../bookmark.service";
-import {BookMarkEdit} from "../bookmark-edit/bookmark-edit.component";
 import { EventManager } from 'ng-jhipster';
 
 @Component({
@@ -17,8 +16,7 @@ export class BookMarkComponent implements OnInit {
 
   constructor(private bookMarkService:BookMarkService,
               private eventManager: EventManager
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.findAll();
@@ -30,6 +28,7 @@ export class BookMarkComponent implements OnInit {
       .findAll()
       .subscribe(bookMarks => this.bookMarks = bookMarks);
   }
+
   detectChangeInBookMark() {
     this.eventManager.subscribe('bookmarkListModification', (response) => this.findAll());
   }
@@ -45,7 +44,6 @@ export class BookMarkComponent implements OnInit {
   }
 
   selected(id:number) {
-
     if (this.ids.find(x=>x == id)) {
       this.ids.splice(this.ids.indexOf(id), 1)
     } else {

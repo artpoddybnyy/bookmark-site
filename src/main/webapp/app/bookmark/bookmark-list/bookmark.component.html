@@ -5,22 +5,30 @@
   <title>main page</title>
 </head>
 <body>
-    <create-bookmark></create-bookmark>
+<br>
 
-    <div class="container">
+    <create-bookmark></create-bookmark>
+    <br/>
+    <div class="container-fluid">
       <div class="col-xs-4">
         <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
-                (click)="deleteBookMarks()"><i class="glyphicon glyphicon-trash"></i>
+                (click)="deleteBookMarks()">
+        <span class="fa fa-remove"></span>
+        <span class="hidden-md-down">Delete</span>
         </button>
       </div>
     </div>
 
+    <br/>
     <div class="container">
-
       <div class="row" *ngFor="let bookmark of bookMarks">
-        <div class="col-sm-1 checkbox checkbox-success">
-          <input type="checkbox" (change)="selected(bookmark.id)"/>
+
+        <div class="col-sm-1">
+          <div class="checkbox checkbox-success">
+          <input type="checkbox" (change)="selected(bookmark.id)">
+          </div>
         </div>
+
         <div class="col-md-7">
           <a href={{bookmark.link}}>{{bookmark.title}}</a>
         </div>
@@ -32,18 +40,18 @@
                   [routerLink]="['/', { outlets: { popup: 'one-bookmark/'+ bookmark.id} }]"
                   replaceUrl="true"
                   class="btn btn-primary btn-sm" data-toggle="modal">
-            <!--<span class="fa fa-pencil"></span>-->
-            <span class="hidden-md-down" jhiTranslate="entity.action.edit"><i class="glyphicon glyphicon-edit"></i></span>
+            <span class="fa fa-pencil"></span>
+            <span class="hidden-md-down"></span>Edit
           </button>
         </div>
         <div class="col-sm-1">
           <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
-                  (click)="deleteBookMarks(selected(bookmark.id))"><i class="glyphicon glyphicon-trash"></i>
+                  (click)="deleteBookMarks(selected(bookmark.id))">
+            <span class="fa fa-remove"></span>
+            <span class="hidden-md-down">Delete</span>
           </button>
         </div>
-        <!--<span class="help-block">This is some help text...</span>-->
       </div>
    </div>
-    <edit-bookmark (updateComponent)="updateData($event)"></edit-bookmark>
 </body>
 </html>
