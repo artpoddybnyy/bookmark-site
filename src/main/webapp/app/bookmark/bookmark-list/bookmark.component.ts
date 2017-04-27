@@ -13,10 +13,14 @@ export class BookMarkComponent implements OnInit {
 
   private ids:number[] = [];
   private bookMarks:Array<BookMark>;
+  private bookMark :BookMark;
+
+  private isSelected: boolean = false;
+
 
   constructor(private bookMarkService:BookMarkService,
-              private eventManager: EventManager
-  ) {}
+              private eventManager:EventManager) {
+  }
 
   ngOnInit() {
     this.findAll();
@@ -49,5 +53,26 @@ export class BookMarkComponent implements OnInit {
     } else {
       this.ids.push(id);
     }
+    console.log(this.ids)
   }
+
+  selectAllCheckbox() {
+    if (this.isSelected) {
+      this.isSelected = false;
+      for (var i = 0; i < this.bookMarks.length; i++) {
+        var bookMark = this.bookMarks[i];
+        this.selected(bookMark.id)
+
+      }
+    }else
+
+      for (var i = 0; i < this.bookMarks.length; i++) {
+        var bookMark = this.bookMarks[i];
+        this.selected(bookMark.id)
+        this.isSelected = true;
+      }
+  }
+
+
+
 }

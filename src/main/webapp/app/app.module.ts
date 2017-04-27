@@ -13,7 +13,6 @@ import {BookMarkPopupService} from "./bookmark/bookmark-edit-popup.service";
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {EventManager} from "ng-jhipster/src/service/event-manager.service";
 
-
 @NgModule({
   imports: [BrowserModule,
     HttpModule,

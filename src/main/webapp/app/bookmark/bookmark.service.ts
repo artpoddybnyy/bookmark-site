@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/Rx";
 import {BookMark} from "./bookmark-list/bookmark.module";
 
+
 @Injectable()
 export class BookMarkService {
 

@@ -6,10 +6,12 @@
 </head>
 <body>
 <br>
-
     <create-bookmark></create-bookmark>
     <br/>
-    <div class="container-fluid">
+    <div class="container-fluid row">
+      <div class="col-xs-2">
+      <input type="checkbox" name="all" [ngModel]="isSelected" (change)="selectAllCheckbox()"/>
+</div>
       <div class="col-xs-4">
         <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
                 (click)="deleteBookMarks()">
@@ -19,17 +21,17 @@
       </div>
     </div>
 
+
     <br/>
-    <div class="container">
+    <div  class="container">
       <div class="row" *ngFor="let bookmark of bookMarks">
 
         <div class="col-sm-1">
           <div class="checkbox checkbox-success">
-          <input type="checkbox" (change)="selected(bookmark.id)">
+          <input type="checkbox" [ngModel]="isSelected"  (change)="selected(bookmark.id)" >
           </div>
         </div>
-
-        <div class="col-md-7">
+        <div  class="col-md-7">
           <a href={{bookmark.link}}>{{bookmark.title}}</a>
         </div>
         <div class="col-md-2">
