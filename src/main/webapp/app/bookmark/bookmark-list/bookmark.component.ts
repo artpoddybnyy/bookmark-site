@@ -13,10 +13,8 @@ export class BookMarkComponent implements OnInit {
 
   private ids:number[] = [];
   private bookMarks:Array<BookMark>;
-  private bookMark :BookMark;
-
-  private isSelected: boolean = false;
-
+  private isSelected: boolean;
+  private isSelectedAll: boolean ;
 
   constructor(private bookMarkService:BookMarkService,
               private eventManager:EventManager) {
@@ -45,6 +43,7 @@ export class BookMarkComponent implements OnInit {
           return true;
         });
     this.ids = [];
+    this.isSelectedAll = false;
   }
 
   selected(id:number) {
@@ -53,26 +52,19 @@ export class BookMarkComponent implements OnInit {
     } else {
       this.ids.push(id);
     }
-    console.log(this.ids)
+    console.log(this.ids);
+
   }
 
-  selectAllCheckbox() {
-    if (this.isSelected) {
-      this.isSelected = false;
-      for (var i = 0; i < this.bookMarks.length; i++) {
-        var bookMark = this.bookMarks[i];
-        this.selected(bookMark.id)
-
-      }
-    }else
-
-      for (var i = 0; i < this.bookMarks.length; i++) {
-        var bookMark = this.bookMarks[i];
-        this.selected(bookMark.id)
-        this.isSelected = true;
-      }
+  selectAllCheckbox(value: boolean) {
+    this.isSelectedAll=this.isSelected;
+    this.bookMarks.forEach(bookMark => {
+      var id = bookMark.id;
+      if  (this.isSelected){
+        this.selected(id);
+      }else
+        this.selected(id);
+    })
   }
-
-
-
 }
+
