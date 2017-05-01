@@ -10,7 +10,7 @@
     <br/>
     <div class="container-fluid row">
       <div class="col-xs-2">
-      <input type="checkbox" name="all" [(ngModel)]="isSelectedAll" (click)="selectAllCheckbox($event.target.value)"/>
+      <input type="checkbox" name="all" [(ngModel)]="isSelectedAll" (click)="selectAllCheckbox()"/>
 </div>
       <div class="col-xs-4">
         <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
@@ -28,7 +28,7 @@
 
         <div class="col-sm-1">
           <div class="checkbox checkbox-success">
-          <input type="checkbox" [checked]="isSelected"  (change)="selected(bookmark.id)" >
+          <input type="checkbox" [checked]="isSelected" [checked] = "exist(bookmark.id)"  (click)="selected(bookmark.id)" >
           </div>
         </div>
         <div  class="col-md-7">
