@@ -27,11 +27,13 @@ export class BookMarkComponent implements OnInit {
   ngOnInit() {
     let title = this.route.snapshot.params['title'];
     if (title!= null){
-      this.findAllByTitle(title)
-    } else
+      this.findAllByTitle(title);
+      this.detectChangeInFoundBookMarks(title)
+    } else{
       this.findAll();
+      this.detectChangeInBookMarks();
+    }
 
-    this.detectChangeInBookMark();
   }
 
   findAll():any {
@@ -46,9 +48,16 @@ export class BookMarkComponent implements OnInit {
       .subscribe(bookMarks => this.bookMarks = bookMarks);
   }
 
-  detectChangeInBookMark() {
+  detectChangeInBookMarks() {
     this.eventManager.subscribe('bookmarkListModification', (response) => this.findAll());
   }
+
+  detectChangeInFoundBookMarks(title) {
+    this.eventManager.subscribe('bookmarkListModification', (response) =>   this.findAllByTitle(title));
+  }
+
+
+
 
   deleteBookMarks() {
     this.bookMarkService.delete(this.ids)
