@@ -1,4 +1,6 @@
 import {Component, OnInit} from "@angular/core";
+import { ActivatedRoute } from '@angular/router';
+
 import {BookMark} from "./bookmark.module";
 import { Observable } from "rxjs/Observable";
 import {BookMarkService} from "../bookmark.service";
@@ -18,17 +20,29 @@ export class BookMarkComponent implements OnInit {
   private isSelectedAll:boolean;
 
   constructor(private bookMarkService:BookMarkService,
+              private route: ActivatedRoute,
               private eventManager:EventManager) {
   }
 
   ngOnInit() {
-    this.findAll();
+    let title = this.route.snapshot.params['title'];
+    if (title!= null){
+      this.findAllByTitle(title)
+    } else
+      this.findAll();
+
     this.detectChangeInBookMark();
   }
 
   findAll():any {
     return this.bookMarkService
       .findAll()
+      .subscribe(bookMarks => this.bookMarks = bookMarks);
+  }
+
+  findAllByTitle(title: string):any {
+    return this.bookMarkService
+      .findAllByTitle(title)
       .subscribe(bookMarks => this.bookMarks = bookMarks);
   }
 
@@ -40,7 +54,7 @@ export class BookMarkComponent implements OnInit {
     this.bookMarkService.delete(this.ids)
       .subscribe(ids => this.ids = ids,
         data => {
-          this.findAll();
+          this.ngOnInit();
           return true;
         });
     this.ids = [];

@@ -4,8 +4,12 @@ import {BookMarkComponent} from "./bookmark/bookmark-list/bookmark.component";
 @Component({
   selector: 'app',
   templateUrl: 'app.component.html',
-  providers: [ ]
+  providers: []
 
 })
-export class AppComponent {
+export class AppComponent  {
+
+  private title : string = null;
+
+
 }
