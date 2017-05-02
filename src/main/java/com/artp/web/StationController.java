@@ -19,15 +19,20 @@ public class StationController {
 
   @RequestMapping(value = "/create-bookmark", method = RequestMethod.POST)
   public void addBookMark(@RequestBody BookMark bookMark) {
-    String titleExtractor = urlService.titleExtractor(bookMark.getLink());
-    bookMark.setTitle(titleExtractor);
+    String title = urlService.titleExtractor(bookMark.getLink());
+    bookMark.setTitle(title);
     bookMarkRepository.save(bookMark);
   }
 
-  @RequestMapping(value = "/all-bookmarks", method = RequestMethod.GET)
+  @RequestMapping(value ="/all-bookmarks",  method = RequestMethod.GET)
   public Iterable<BookMark> getBookMarks() {
-    return bookMarkRepository.findAll();
+      return bookMarkRepository.findAll();
   }
+
+  @RequestMapping(value ="/all-bookmarks/{title}", method = RequestMethod.GET)
+  public Iterable<BookMark> getAllBookMarksByTitle(@PathVariable("title") String title) {
+       return bookMarkRepository.findByTitleContainingIgnoreCase(title);
+   }
 
   @RequestMapping(value = "/one-bookmark/{id}", method = RequestMethod.GET)
   public BookMark getOneBookMark(@PathVariable("id") Long id) {

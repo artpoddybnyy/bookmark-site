@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface BookMarkRepository extends CrudRepository<BookMark, Long> {
 
 
+  Iterable<BookMark> findByTitleContainingIgnoreCase(String title);
 }
