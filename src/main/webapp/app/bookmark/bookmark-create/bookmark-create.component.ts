@@ -5,31 +5,28 @@ import {BookMarkComponent} from "../bookmark-list/bookmark.component";
 
 @Component({
   selector: "create-bookmark",
-    templateUrl: "bookmark-create.component.html"
+  templateUrl: "bookmark-create.component.html"
 
 
 })
 
-export class BookMarkCreate implements OnInit{
+export class BookMarkCreate implements OnInit {
 
   public bookMark = new BookMark;
+  private errorMessage: string ;
 
-    constructor(private bookMarkService: BookMarkService,
-                private bookMarkComponent: BookMarkComponent) {
-    }
+  constructor(private bookMarkService:BookMarkService, private bookMarkComponent: BookMarkComponent) {
+  }
 
-    ngOnInit() {}
-
-
-    createBookMark(bookMark: BookMark) {
-        return this.bookMarkService
-            .create(bookMark)
-            .subscribe(bookMark => this.bookMark = bookMark,
-                data => {
-                  this.bookMarkComponent.findAll();
-                  bookMark.link = null;
-                  return true;
-                });
-
-    }
+  ngOnInit() {
+  }
+  createBookMark(bookMark:BookMark) {
+    return this.bookMarkService
+      .create(bookMark)
+      .subscribe(bookMark => this.bookMark = bookMark,
+        //error =>  this.errorMessage = <any>error
+        data => {
+          this.bookMarkComponent.findAll()}
+  );
+  }
 }

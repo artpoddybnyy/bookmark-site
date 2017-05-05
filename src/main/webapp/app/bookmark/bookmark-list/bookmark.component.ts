@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
 import { ActivatedRoute } from '@angular/router';
-
 import {BookMark} from "./bookmark.module";
 import { Observable } from "rxjs/Observable";
 import {BookMarkService} from "../bookmark.service";
@@ -33,7 +32,6 @@ export class BookMarkComponent implements OnInit {
       this.findAll();
       this.detectChangeInBookMarks();
     }
-
   }
 
   findAll():any {
@@ -55,9 +53,6 @@ export class BookMarkComponent implements OnInit {
   detectChangeInFoundBookMarks(title) {
     this.eventManager.subscribe('bookmarkListModification', (response) =>   this.findAllByTitle(title));
   }
-
-
-
 
   deleteBookMarks() {
     this.bookMarkService.delete(this.ids)

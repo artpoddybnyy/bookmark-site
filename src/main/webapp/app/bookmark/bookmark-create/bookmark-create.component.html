@@ -1,12 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <form class="form-inline my-2 my-lg-2" #createForm="ngForm"
+            (ngSubmit)="createBookMark(bookMark); createForm.reset();" #createForm="ngForm">
 
-<div class="container-fluid">
 
-  <form class="form-inline my-2 my-lg-0">
-    <input class="form-control col-8" type="url" placeholder="Enter URL https://example.com"
-           id="link" name="link" #link="ngModel" [(ngModel)]="bookMark.link"/>
+        <input class="form-control col-8" type="url" placeholder="Enter URL https://example.com"
+               required id="link" name="link" #link="ngModel" [(ngModel)]="bookMark.link"/>
 
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"(click)="createBookMark(bookMark)" >Save</button>
-  </form>
+        <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+
+        <button type="submit" class="btn btn-outline-success my-2 my-sm-0"
+                [disabled]="!createForm.form.valid">Save
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
 
 

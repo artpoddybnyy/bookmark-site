@@ -41,24 +41,22 @@ export class BookMarkService {
   create(bookMark:BookMark):Observable<BookMark> {
     let body = JSON.stringify(bookMark);
     return this.http.post(this.createBookMark, body, this.options)
-      .map((res:Response) => res.json())
+      .map((response:Response) => response.json())
       .catch(this.handleError);
-
   }
 
 
   delete(id:number[]):Observable<number[]> {
     let body = JSON.stringify(id);
     return this.http.post(this.deleteBookMarks, body, this.options)
-      .map((res:Response) => res.json())
+      .map((response:Response) => response.json())
       .catch(this.handleError);
   }
-
 
   updateBookMark(bookMark:BookMark):Observable<BookMark> {
     let body = JSON.stringify(bookMark);
     return this.http.put(this.updateBookMarkUr, body, this.options)
-      .map((res:Response) => res.json())
+      .map((response:Response) => response.json())
       .catch(this.handleError);
   }
 
@@ -72,7 +70,6 @@ export class BookMarkService {
     } else {
       errMessage = err.message ? err.message : err.toString();
     }
-
     return Observable.throw(errMessage);
   }
 }

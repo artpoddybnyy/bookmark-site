@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>main page</title>
-</head>
-<body>
-<br>
-    <create-bookmark></create-bookmark>
-    <br/>
-    <div class="container-fluid row">
-      <div class="col-xs-2">
-      <input type="checkbox" name="all" [(ngModel)]="isSelectedAll" (click)="selectAllCheckbox()"/>
-</div>
-      <div class="col-xs-4">
-        <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
-                (click)="deleteBookMarks()">
-        <span class="fa fa-remove"></span>
-        <span class="hidden-md-down">Delete</span>
-        </button>
-      </div>
-    </div>
+            <head>
+              <meta charset="UTF-8">
+              <title>main page</title>
+            </head>
+            <body>
 
+            <create-bookmark></create-bookmark>
 
-    <br/>
-    <div  class="container">
-      <div class="row" *ngFor="let bookmark of bookMarks">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-1">
+                  <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="all" [(ngModel)]="isSelectedAll" (click)="selectAllCheckbox()"/>
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>
+                  </label>
+              </div>
 
-        <div class="col-sm-1">
-          <div class="checkbox checkbox-success">
-          <input type="checkbox" [checked]="isSelected" [checked] = "exist(bookmark.id)"  (click)="selected(bookmark.id)" >
-          </div>
-        </div>
-        <div  class="col-md-7">
-          <a href={{bookmark.link}}>{{bookmark.title}}</a>
-        </div>
-        <div class="col-md-2">
-          {{bookmark.dateCreation | date}}
-        </div>
-        <div class="col-sm-1">
-          <button type="submit"
-                  [routerLink]="['/', { outlets: { popup: 'one-bookmark/'+ bookmark.id} }]"
-                  replaceUrl="true"
-                  class="btn btn-primary btn-sm" data-toggle="modal">
-            <span class="fa fa-pencil"></span>
-            <span class="hidden-md-down"></span>Edit
-          </button>
-        </div>
-        <div class="col-sm-1">
-          <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
-                  (click)="deleteBookMarks(selected(bookmark.id))">
-            <span class="fa fa-remove"></span>
-            <span class="hidden-md-down">Delete</span>
-          </button>
-        </div>
-      </div>
-   </div>
-</body>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
+                        (click)="deleteBookMarks()">
+                  <span class="fa fa-remove"></span>
+                  <span class="hidden-md-down">Delete</span>
+                </button>
+              </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row" *ngFor="let bookmark of bookMarks">
+
+                <div class="col-sm-1">
+                  <label class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input"
+                           [checked]="isSelected" [checked]="exist(bookmark.id)" (click)="selected(bookmark.id)">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>
+                  </label>
+                </div>
+
+                <div class="col-md-7">
+                  <a href={{bookmark.link}}>{{bookmark.title}}</a>
+                </div>
+                <div class="col-md-2">
+                  {{bookmark.dateCreation | date}}
+                </div>
+                <div class="col-sm-1">
+                  <button type="submit"
+                          [routerLink]="['/', { outlets: { popup: 'one-bookmark/'+ bookmark.id} }]"
+                          replaceUrl="true"
+                          class="btn btn-primary btn-sm" data-toggle="modal">
+                    <span class="fa fa-pencil"></span>
+                    <span class="hidden-md-down"></span>Edit
+                  </button>
+                </div>
+                <div class="col-sm-1">
+                  <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
+                          (click)="deleteBookMarks(selected(bookmark.id))">
+                    <span class="fa fa-remove"></span>
+                    <span class="hidden-md-down">Delete</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            </body>
 </html>
