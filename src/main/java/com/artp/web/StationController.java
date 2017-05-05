@@ -4,6 +4,8 @@ import com.artp.domain.BookMark;
 import com.artp.repository.BookMarkRepository;
 import com.artp.services.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -18,10 +20,15 @@ public class StationController {
   private UrlService urlService;
 
   @RequestMapping(value = "/create-bookmark", method = RequestMethod.POST)
-  public void addBookMark(@RequestBody BookMark bookMark) {
+  @ResponseBody
+  public ResponseEntity addBookMark(@RequestBody BookMark bookMark) {
     String title = urlService.titleExtractor(bookMark.getLink());
+   if (title.equals("404")){
+     return new ResponseEntity(HttpStatus.NOT_FOUND);
+   }else
     bookMark.setTitle(title);
     bookMarkRepository.save(bookMark);
+    return new ResponseEntity(HttpStatus.OK);
   }
 
   @RequestMapping(value ="/all-bookmarks",  method = RequestMethod.GET)
