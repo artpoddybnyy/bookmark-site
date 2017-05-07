@@ -10,58 +10,56 @@ export class BookMarkService {
 
   private getListBookMark:string = "/all-bookmarks";
   private getOneBookMark:string = "/one-bookmark";
-  private createBookMark:string = "/create-bookmark";
+  private createBookMarkUrl:string = "/create-bookmark";
   private deleteBookMarks:string = "/delete-bookmarks";
-  private updateBookMarkUr:string = "/update-bookmark";
-
-  private headers = new Headers({'Content-Type': "application/json"});
-  private options = new RequestOptions({headers: this.headers});
+  private updateBookMarkUrl:string = "/update-bookmark";
 
   constructor(private http:Http) {
   }
 
   findAll():Observable<BookMark[]> {
     return this.http.get(this.getListBookMark)
-      .map((response:Response) => response.json())
+      .map(this.extractData)
       .catch(this.handleError);
   }
 
   findAllByTitle(title:string):Observable<BookMark[]> {
     return this.http.get(`${this.getListBookMark}/${title}`)
-      .map((response:Response) => response.json())
+      .map(this.extractData)
       .catch(this.handleError);
   }
 
-  findOne(id:number):Observable<BookMark> {
+  findOneBookMark(id:number):Observable<BookMark> {
     return this.http.get(`${this.getOneBookMark}/${id}`)
-      .map((response:Response) => response.json())
+      .map(this.extractData)
       .catch(this.handleError);
   }
 
-  create(bookMark:BookMark):Observable<BookMark> {
-    let body = JSON.stringify(bookMark);
-    return this.http.post(this.createBookMark, body, this.options)
-      .map((response:Response) => response.json())
-      .catch(this.handleError);
+  createBookMark(bookMark:BookMark):Observable<Response> {
+    return this.http.post(this.createBookMarkUrl, bookMark)
+      .catch(this.urlError);
   }
 
 
-  delete(id:number[]):Observable<number[]> {
-    let body = JSON.stringify(id);
-    return this.http.post(this.deleteBookMarks, body, this.options)
-      .map((response:Response) => response.json())
-      .catch(this.handleError);
+  deleteBookMark(id:number[]):Observable<Response> {
+      return this.http.post(this.deleteBookMarks, id)
+        .catch(this.handleError);
   }
 
-  updateBookMark(bookMark:BookMark):Observable<BookMark> {
-    let body = JSON.stringify(bookMark);
-    return this.http.put(this.updateBookMarkUr, body, this.options)
-      .map((response:Response) => response.json())
-      .catch(this.handleError);
+  updateBookMark(bookMark:BookMark):Observable<Response> {
+       return this.http.put(this.updateBookMarkUrl,bookMark )
+          .catch(this.handleError);
   }
 
+  private extractData(res:Response) {
+    let body;
+       if (res.text()) {
+      body = res.json();
+    }
+    return body || {};
+  }
 
-  private handleError(err) {
+  private handleError(err:Response | any) {
     let errMessage:string;
     if (err instanceof Response) {
       let body = err.json() || '';
@@ -70,6 +68,14 @@ export class BookMarkService {
     } else {
       errMessage = err.message ? err.message : err.toString();
     }
+    console.error(errMessage);
     return Observable.throw(errMessage);
+
+  }
+
+  private urlError(err: Response | any) :any {
+    if (err.status < 200 || err.status >= 300) {
+      return Observable.throw("Введенный адрес не существует, проверте и попробуйте снова!");
+    }else return Observable.throw(err);
   }
 }

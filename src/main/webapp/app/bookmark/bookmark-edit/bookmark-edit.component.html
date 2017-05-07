@@ -12,22 +12,23 @@
 
     <div class="modal-body">
       <form name="editForm" role="form" novalidate (ngSubmit)="updateBookMark()" #editForm="ngForm">
+
         <div class="form-group">
           <label for="title">Title</label>
-          <input class="form-control" type="text" id="title" title="title" [(ngModel)]="bookMark.title" name="title">
+          <input class="form-control" required type="text" id="title" title="title" [(ngModel)]="bookMark.title" name="title">
         </div>
 
         <div class="form-group">
           <label for="link">Link</label>
-          <input class="form-control" type="text" id="link" title="link" [(ngModel)]="bookMark.link" name="link">
+          <input type="url" class="form-control" required  id="link" title="link" [(ngModel)]="bookMark.link" name="link">
         </div>
+
         <div class="modal-footer">
-          <button class="btn btn-success" type="submit">Update</button>
+          <button class="btn btn-success" type="submit" [disabled]="!editForm.form.valid">Update</button>
           <button type="button" class="btn btn-default" (click)="clear()">Cancel</button>
         </div>
+
       </form>
     </div>
   </div>
-
-
 </div>

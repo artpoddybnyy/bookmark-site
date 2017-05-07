@@ -51,19 +51,19 @@ export class BookMarkComponent implements OnInit {
   }
 
   detectChangeInFoundBookMarks(title) {
-    this.eventManager.subscribe('bookmarkListModification', (response) =>   this.findAllByTitle(title));
+    this.eventManager.subscribe('bookmarkListModification', (response) => this.findAllByTitle(title));
   }
 
   deleteBookMarks() {
-    this.bookMarkService.delete(this.ids)
-      .subscribe(ids => this.ids = ids,
-        data => {
-          this.ngOnInit();
-          return true;
-        });
+    this.bookMarkService.deleteBookMark(this.ids)
+      .subscribe(response => this.onDeleteSuccess());
     this.ids = [];
     this.isSelectedAll = false;
   }
+  private onDeleteSuccess() {
+    this.eventManager.broadcast({name: 'bookmarkListModification', content: 'OK'});
+  }
+
 
   selected(id:number) {
     var number = this.ids.indexOf(id);
@@ -81,7 +81,6 @@ export class BookMarkComponent implements OnInit {
 
   selectAllCheckbox() {
     if (!this.isSelectedAll) {
-
       this.bookMarks.forEach(bookMark => {
         var number = this.ids.indexOf(bookMark.id);
         if (number >= 0) {

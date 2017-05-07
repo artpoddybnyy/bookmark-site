@@ -20,7 +20,7 @@ public class BookMark {
 
   @Column(name = "date_creation")
   @CreationTimestamp
-  @Temporal(value = TemporalType.DATE)
+  @Temporal(value = TemporalType.TIMESTAMP)
   private Date dateCreation;
 
   public Long getId() {

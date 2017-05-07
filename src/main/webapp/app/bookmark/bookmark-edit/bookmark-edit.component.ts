@@ -27,11 +27,7 @@ export class BookMarkEdit implements OnInit {
 
   updateBookMark() {
     this.bookMarkService.updateBookMark(this.bookMark)
-      .subscribe(bookMark => this.bookMark = bookMark,
-        data => {
-          this.onSaveSuccess();
-          return true;
-        });
+      .subscribe(response => this.onSaveSuccess());
   }
 
   private onSaveSuccess() {

@@ -8,8 +8,4 @@ import {BookMarkComponent} from "./bookmark/bookmark-list/bookmark.component";
 
 })
 export class AppComponent  {
-
-  private title : string = null;
-
-
 }

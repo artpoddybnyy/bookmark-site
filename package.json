@@ -21,10 +21,12 @@
     "@angular/platform-browser-dynamic": "^2.4.0",
     "@angular/router": "^3.4.0",
     "@ng-bootstrap/ng-bootstrap": "1.0.0-alpha.20",
-
     "core-js": "^2.4.1",
     "ng-jhipster": "0.1.8",
+    "ng2-toasty": "^4.0.0",
+    "ngx-pipes": "^1.5.10",
     "rxjs": "^5.1.0",
+    "time-ago-pipe": "^1.2.1",
     "zone.js": "^0.7.6"
   },
   "devDependencies": {

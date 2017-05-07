@@ -11,25 +11,37 @@ import {BookMarkService} from "./bookmark/bookmark.service";
 import {BookMarkPopComponent} from "./bookmark/bookmark-edit/bookmrak-edit-popup.component";
 import {BookMarkPopupService} from "./bookmark/bookmark-edit-popup.service";
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {EventManager} from "ng-jhipster/src/service/event-manager.service";
+import {EventManager} from "ng-jhipster";
+import {NgPipesModule} from "ngx-pipes";
+import {ReversePipe} from "ngx-pipes/src/app/pipes/array/reverse";
+import {ToastyModule} from "ng2-toasty";
+import {TimeAgoPipe} from "time-ago-pipe/time-ago-pipe";
 
 @NgModule({
   imports: [BrowserModule,
     HttpModule,
     FormsModule,
     routing,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    NgPipesModule,
+    ToastyModule.forRoot()
   ],
+
   declarations: [AppComponent,
     BookMarkComponent,
     BookMarkCreate,
     BookMarkEdit,
-    BookMarkPopComponent
+    BookMarkPopComponent,
+    TimeAgoPipe
   ],
   entryComponents: [BookMarkEdit
   ],
   providers: [ NgbActiveModal,
-    BookMarkService, BookMarkPopupService, EventManager, BookMarkComponent],
+    BookMarkService,
+    BookMarkPopupService,
+    EventManager,
+    BookMarkComponent,
+    ReversePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {
