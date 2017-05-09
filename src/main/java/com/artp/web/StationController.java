@@ -1,7 +1,9 @@
 package com.artp.web;
 
 import com.artp.domain.BookMark;
+import com.artp.domain.BookmarksCategory;
 import com.artp.repository.BookMarkRepository;
+import com.artp.repository.CategoryRepo;
 import com.artp.services.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,29 +19,31 @@ public class StationController {
   @Autowired
   private BookMarkRepository bookMarkRepository;
   @Autowired
+  private CategoryRepo categoryRepo;
+  @Autowired
   private UrlService urlService;
 
   @RequestMapping(value = "/create-bookmark", method = RequestMethod.POST)
   @ResponseBody
   public ResponseEntity addBookMark(@RequestBody BookMark bookMark) {
     String title = urlService.titleExtractor(bookMark.getLink());
-   if (title.equals("404")){
-     return new ResponseEntity(HttpStatus.NOT_FOUND);
-   }else
-    bookMark.setTitle(title);
+    if (title.equals("404")) {
+      return new ResponseEntity(HttpStatus.NOT_FOUND);
+    } else
+      bookMark.setTitle(title);
     bookMarkRepository.save(bookMark);
     return new ResponseEntity(HttpStatus.OK);
   }
 
-  @RequestMapping(value ="/all-bookmarks",  method = RequestMethod.GET)
+  @RequestMapping(value = "/all-bookmarks", method = RequestMethod.GET)
   public Iterable<BookMark> getBookMarks() {
-      return bookMarkRepository.findAll();
+    return bookMarkRepository.findAll();
   }
 
-  @RequestMapping(value ="/all-bookmarks/{title}", method = RequestMethod.GET)
+  @RequestMapping(value = "/all-bookmarks/{title}", method = RequestMethod.GET)
   public Iterable<BookMark> getAllBookMarksByTitle(@PathVariable("title") String title) {
-       return bookMarkRepository.findByTitleContainingIgnoreCase(title);
-   }
+    return bookMarkRepository.findByTitleContainingIgnoreCase(title);
+  }
 
   @RequestMapping(value = "/one-bookmark/{id}", method = RequestMethod.GET)
   public BookMark getOneBookMark(@PathVariable("id") Long id) {
@@ -55,6 +59,24 @@ public class StationController {
 
   @RequestMapping(value = "/update-bookmark", method = RequestMethod.PUT)
   public void updateBookMark(@RequestBody BookMark bookMark) {
+
+    bookMark.setBookmarksCategory(categoryRepo.findOne(bookMark.getId()));
     bookMarkRepository.save(bookMark);
   }
+
+
+  @RequestMapping(value = "/create-category", method = RequestMethod.POST)
+  public void createBookMarksCategory(@RequestBody BookmarksCategory category) {
+    categoryRepo.save(category);
+
+  }
+
+  @RequestMapping(value = "/all-category", method = RequestMethod.GET)
+  public Iterable<BookmarksCategory> getBookMarksCategory() {
+        return categoryRepo.findAll();
+  }
+
 }
+
+
+

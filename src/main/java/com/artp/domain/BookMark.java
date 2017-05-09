@@ -4,11 +4,12 @@ package com.artp.domain;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "bookmarks")
-public class BookMark {
+public class BookMark implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +23,11 @@ public class BookMark {
   @CreationTimestamp
   @Temporal(value = TemporalType.TIMESTAMP)
   private Date dateCreation;
+
+
+  @ManyToOne
+  @JoinColumn(name = "bookmarks_category_id")
+  private BookmarksCategory bookmarksCategory;
 
   public Long getId() {
     return id;
@@ -49,5 +55,13 @@ public class BookMark {
 
   public void setDateCreation(Date dateCreation) {
     this.dateCreation = dateCreation;
+  }
+
+  public BookmarksCategory getBookmarksCategory() {
+    return bookmarksCategory;
+  }
+
+  public void setBookmarksCategory(BookmarksCategory bookmarksCategory) {
+    this.bookmarksCategory = bookmarksCategory;
   }
 }

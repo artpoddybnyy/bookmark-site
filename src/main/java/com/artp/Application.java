@@ -13,21 +13,22 @@ import java.net.UnknownHostException;
 @SpringBootApplication
 public class Application {
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+  private static final Logger log = LoggerFactory.getLogger(Application.class);
 
-    public static void main(String[] args) throws UnknownHostException {
+  public static void main(String[] args) throws UnknownHostException {
 
-        SpringApplication app = new SpringApplication(Application.class);
-        Environment env = app.run(args).getEnvironment();
-        log.info("\n----------------------------------------------------------\n\t" +
-                        "Application '{}' is running! Access URLs:\n\t" +
-                        "Local: \t\thttp://localhost:{}\n\t" +
-                        "External: \thttp://{}:{}\n\t" +
-                        "Profile(s): \t{}\n----------------------------------------------------------",
-                env.getProperty("spring.application.name"),
-                env.getProperty("server.port"),
-                InetAddress.getLocalHost().getHostAddress(),
-                env.getProperty("server.port"),
-                env.getActiveProfiles());
-    }
+    SpringApplication app = new SpringApplication(Application.class);
+    Environment env = app.run(args).getEnvironment();
+    log.info("\n----------------------------------------------------------\n\t" +
+        "Application '{}' is running! Access URLs:\n\t" +
+        "Local: \t\thttp://localhost:{}\n\t" +
+        "External: \thttp://{}:{}\n\t" +
+        "Profile(s): \t{}\n----------------------------------------------------------",
+      env.getProperty("spring.application.name"),
+      env.getProperty("server.port"),
+      InetAddress.getLocalHost().getHostAddress(),
+      env.getProperty("server.port"),
+      env.getActiveProfiles());
+
+  }
 }

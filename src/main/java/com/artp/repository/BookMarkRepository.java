@@ -10,4 +10,7 @@ public interface BookMarkRepository extends CrudRepository<BookMark, Long> {
 
 
   Iterable<BookMark> findByTitleContainingIgnoreCase(String title);
+
+
+//  Iterable<BookMark> findByBookmarksCategoryContainingIgnoreCase(String category);
 }
