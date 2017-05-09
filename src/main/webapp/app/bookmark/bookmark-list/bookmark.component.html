@@ -8,64 +8,78 @@
 
             <create-bookmark></create-bookmark>
 
-            <div class="container">
-              <div class="row">
-                <div class="col-md-1">
-                  <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="all" [(ngModel)]="isSelectedAll"
-                           (click)="selectAllCheckbox()"/>
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description"></span>
-                  </label>
-                </div>
+            <div class="container-fluid">
+              <div class="row col-lg-12">
 
-                <div class="col-md-2">
-                  <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
-                          (click)="deleteBookMarks()">
-                    <span class="fa fa-remove"></span>
-                    <span class="hidden-md-down">Delete</span>
-                  </button>
+                <div class="col-md-2"></div>
+
+                <div class="col-md-10">
+                  <div class="row">
+                  <div class="col-md-1">
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" name="all" [(ngModel)]="isSelectedAll"
+                             (click)="selectAllCheckbox()"/>
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description"></span>
+                    </label>
+                  </div>
+
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
+                            (click)="deleteBookMarks()">
+                      <span class="fa fa-remove"></span>
+                      <span class="hidden-md-down">Delete</span>
+                    </button>
+                  </div>
+                </div>
                 </div>
               </div>
+
             </div>
-            <!--<div class="hover">-->
-            <div class="container">
 
-              <div class="row" *ngFor="let bookmark of bookMarks | reverse">
+            <div class="container-fluid">
+              <div class="row col-lg-12">
 
-                <div class="col-sm-1">
-                  <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input"
-                           [checked]="isSelected" [checked]="exist(bookmark.id)"
-                           (click)="selected(bookmark.id)">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description"></span>
-                  </label>
+                <div class="col-md-2">
+                  <h4>Some component</h4>
                 </div>
+                <div class="col-md-10">
+                  <div class="row" *ngFor="let bookmark of bookMarks | reverse">
 
-                <div class="col-md-6">
-                  <a href={{bookmark.link}}>{{bookmark.title}}</a>
+                    <div class="col-sm-1">
+                      <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input"
+                               [checked]="isSelected" [checked]="exist(bookmark.id)"
+                               (click)="selected(bookmark.id)">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"></span>
+                      </label>
+                    </div>
+
+                    <div class="col-md-6">
+                      <a href={{bookmark.link}}>{{bookmark.title}}</a>
+                    </div>
+                    <div class="col-md-3">
+                      {{bookmark.dateCreation | timeAgo}}
+                    </div>
+                    <div class="col-sm-1">
+                      <button type="submit"
+                              [routerLink]="['/', { outlets: { popup: 'one-bookmark/'+ bookmark.id} }]"
+                              replaceUrl="true"
+                              class="btn btn-primary btn-sm" data-toggle="modal">
+                        <span class="fa fa-pencil"></span>
+                        <span class="hidden-md-down"></span>Edit
+                      </button>
+                    </div>
+                    <div class="col-sm-1">
+                      <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
+                              (click)="deleteBookMarks(selected(bookmark.id))">
+                        <span class="fa fa-remove"></span>
+                        <span class="hidden-md-down">Delete</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-3">
-                  {{bookmark.dateCreation | timeAgo}}
-                </div>
-                <div class="col-sm-1">
-                  <button type="submit"
-                          [routerLink]="['/', { outlets: { popup: 'one-bookmark/'+ bookmark.id} }]"
-                          replaceUrl="true"
-                          class="btn btn-primary btn-sm" data-toggle="modal">
-                    <span class="fa fa-pencil"></span>
-                    <span class="hidden-md-down"></span>Edit
-                  </button>
-                </div>
-                <div class="col-sm-1">
-                  <button type="button" class="btn btn-danger btn-sm" href="/app/delete-bookmarks"
-                          (click)="deleteBookMarks(selected(bookmark.id))">
-                    <span class="fa fa-remove"></span>
-                    <span class="hidden-md-down">Delete</span>
-                  </button>
-                </div>
-                <!--</div>-->
               </div>
             </div>
             </body>

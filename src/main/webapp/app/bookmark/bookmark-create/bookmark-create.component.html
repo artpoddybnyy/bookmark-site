@@ -1,18 +1,21 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <form class="form-inline my-2 my-lg-2" #createForm="ngForm"
-            (ngSubmit)="createBookMark(bookMark); createForm.reset(); " #createForm="ngForm">
+<div class="container-fluid">
+  <div class="row col-lg-12">
+    <div class="col-md-2">
+      </div>
 
-        <input class="form-control col-8" type="url" placeholder="Enter URL https://example.com"
-               required id="link" name="link" #link="ngModel" [(ngModel)]="bookMark.link"/>
+      <div class="col-md-10">
+        <form class="form-inline my-2 my-lg-2" #createForm="ngForm"
+              (ngSubmit)="createBookMark(bookMark); createForm.reset(); " #createForm="ngForm">
 
-        <button type="submit" class="btn btn-outline-success my-2 my-sm-0"
-                [disabled]="!createForm.form.valid">Save
-        </button>
-      </form>
+          <input class="form-control col-8" type="url" placeholder="Enter URL https://example.com"
+                 required id="link" name="link" #link="ngModel" [(ngModel)]="bookMark.link"/>
+
+          <button type="submit" class="btn btn-outline-success my-2 my-sm-0"
+                  [disabled]="!createForm.form.valid">Save
+          </button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
-<ng2-toasty [position]="'top-center'"></ng2-toasty>
+  <ng2-toasty [position]="'top-center'"></ng2-toasty>
 
