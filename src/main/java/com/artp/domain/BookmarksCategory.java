@@ -1,32 +1,38 @@
 package com.artp.domain;
 
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import javax.persistence.*;
+import java.util.List;
 @Entity
 @Table(name = "bookmarks_category")
-public class BookmarksCategory implements Serializable {
+public class BookmarksCategory  {
 
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column (name = "bookmarks_category_id")
-  private int id;
+  private Long id;
 
   private String categoryName;
 
-  @OneToMany(targetEntity = BookMark.class, mappedBy = "bookmarksCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "bookmarkCategory", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JsonManagedReference
   private List <BookMark> bookMarks;
 
-  public int getId() {
+  public BookmarksCategory() {
+
+  }
+
+  public BookmarksCategory(int arg) {
+
+  }
+
+  public Long getId() {
     return id;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
 
   public String getCategoryName() {
     return categoryName;
@@ -43,4 +49,5 @@ public class BookmarksCategory implements Serializable {
   public void setBookMarks(List<BookMark> bookMarks) {
     this.bookMarks = bookMarks;
   }
-}
+
+ }

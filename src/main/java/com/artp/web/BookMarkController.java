@@ -14,7 +14,7 @@ import java.util.Set;
 
 
 @RestController
-public class StationController {
+public class BookMarkController {
 
   @Autowired
   private BookMarkRepository bookMarkRepository;
@@ -60,7 +60,8 @@ public class StationController {
   @RequestMapping(value = "/update-bookmark", method = RequestMethod.PUT)
   public void updateBookMark(@RequestBody BookMark bookMark) {
 
-    bookMark.setBookmarksCategory(categoryRepo.findOne(bookMark.getId()));
+     bookMark.setBookmarkCategory(categoryRepo.findOne(bookMark.getCategoryId()));
+
     bookMarkRepository.save(bookMark);
   }
 
@@ -68,7 +69,6 @@ public class StationController {
   @RequestMapping(value = "/create-category", method = RequestMethod.POST)
   public void createBookMarksCategory(@RequestBody BookmarksCategory category) {
     categoryRepo.save(category);
-
   }
 
   @RequestMapping(value = "/all-category", method = RequestMethod.GET)

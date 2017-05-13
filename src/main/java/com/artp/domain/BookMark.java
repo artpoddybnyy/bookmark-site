@@ -1,15 +1,16 @@
 package com.artp.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
+
 
 @Entity
 @Table(name = "bookmarks")
-public class BookMark implements Serializable {
+public class BookMark {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,10 +25,12 @@ public class BookMark implements Serializable {
   @Temporal(value = TemporalType.TIMESTAMP)
   private Date dateCreation;
 
-
-  @ManyToOne
+  @JsonBackReference
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "bookmarks_category_id")
-  private BookmarksCategory bookmarksCategory;
+  private BookmarksCategory bookmarkCategory;
+
+  private Long categoryId;
 
   public Long getId() {
     return id;
@@ -57,11 +60,23 @@ public class BookMark implements Serializable {
     this.dateCreation = dateCreation;
   }
 
-  public BookmarksCategory getBookmarksCategory() {
-    return bookmarksCategory;
+  public BookmarksCategory getBookmarkCategory() {
+    return bookmarkCategory;
   }
 
-  public void setBookmarksCategory(BookmarksCategory bookmarksCategory) {
-    this.bookmarksCategory = bookmarksCategory;
+  public void setBookmarkCategory(BookmarksCategory bookmarkCategory) {
+    this.bookmarkCategory = bookmarkCategory;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Long getCategoryId() {
+    return categoryId;
+  }
+
+  public void setCategoryId(Long categoryId) {
+    this.categoryId = categoryId;
   }
 }
