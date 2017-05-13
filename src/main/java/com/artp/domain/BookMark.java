@@ -12,15 +12,13 @@ import java.util.Date;
 @Table(name = "bookmarks")
 public class BookMark {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Id @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
   private String title;
 
   private String link;
 
-  @Column(name = "date_creation")
   @CreationTimestamp
   @Temporal(value = TemporalType.TIMESTAMP)
   private Date dateCreation;
@@ -29,6 +27,7 @@ public class BookMark {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "bookmarks_category_id")
   private BookmarksCategory bookmarkCategory;
+
 
   private Long categoryId;
 

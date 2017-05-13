@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CategoryRepo extends CrudRepository<BookmarksCategory, Long> {
+public interface BookMarkCategoryRepository extends CrudRepository<BookmarksCategory, Long> {
 
 }

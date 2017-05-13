@@ -1,4 +1,4 @@
-INSERT INTO  bookmarks (title, link, date_creation, bookmarkcategory)VALUES ( 'Angular 2', 'https://angular.io/', CURRENT_TIMESTAMP, 1);
+INSERT INTO  bookmarks (title, link, date_creation)VALUES ( 'Angular 2', 'https://angular.io/', CURRENT_TIMESTAMP);
 INSERT INTO  bookmarks (title, link, date_creation)VALUES ( 'Angular CLI', 'https://cli.angular.io/', CURRENT_TIMESTAMP);
 INSERT INTO  bookmarks (title, link, date_creation)VALUES ( 'Angular Material', 'https://material.angular.io/', CURRENT_TIMESTAMP);
 INSERT INTO  bookmarks (title, link, date_creation)VALUES ( 'Spring', 'https://spring.io/', CURRENT_TIMESTAMP);
@@ -11,7 +11,7 @@ INSERT INTO  bookmarks (title, link, date_creation)VALUES ( 'MySql', 'https://ww
 
 
 
-INSERT INTO  bookmarks_category (bookmarks_category_id, category_name)VALUES (1, 'Angular 2');
-INSERT INTO  bookmarks_category (bookmarks_category_id, category_name)VALUES (2, 'Java and else');
+INSERT INTO  bookmarks_category ( category_name)VALUES ( 'Angular 2');
+INSERT INTO  bookmarks_category ( category_name)VALUES ( 'Java and else');
 
 

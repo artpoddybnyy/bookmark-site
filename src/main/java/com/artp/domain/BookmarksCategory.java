@@ -12,8 +12,7 @@ public class BookmarksCategory  {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column (name = "bookmarks_category_id")
-  private Long id;
+   private Long id;
 
   private String categoryName;
 

@@ -3,7 +3,7 @@ package com.artp.web;
 import com.artp.domain.BookMark;
 import com.artp.domain.BookmarksCategory;
 import com.artp.repository.BookMarkRepository;
-import com.artp.repository.CategoryRepo;
+import com.artp.repository.BookMarkCategoryRepository;
 import com.artp.services.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class BookMarkController {
   @Autowired
   private BookMarkRepository bookMarkRepository;
   @Autowired
-  private CategoryRepo categoryRepo;
+  private BookMarkCategoryRepository category;
   @Autowired
   private UrlService urlService;
 
@@ -60,7 +60,7 @@ public class BookMarkController {
   @RequestMapping(value = "/update-bookmark", method = RequestMethod.PUT)
   public void updateBookMark(@RequestBody BookMark bookMark) {
 
-     bookMark.setBookmarkCategory(categoryRepo.findOne(bookMark.getCategoryId()));
+     bookMark.setBookmarkCategory(category.findOne(bookMark.getCategoryId()));
 
     bookMarkRepository.save(bookMark);
   }
@@ -68,12 +68,12 @@ public class BookMarkController {
 
   @RequestMapping(value = "/create-category", method = RequestMethod.POST)
   public void createBookMarksCategory(@RequestBody BookmarksCategory category) {
-    categoryRepo.save(category);
+    this.category.save(category);
   }
 
   @RequestMapping(value = "/all-category", method = RequestMethod.GET)
   public Iterable<BookmarksCategory> getBookMarksCategory() {
-        return categoryRepo.findAll();
+        return category.findAll();
   }
 
 }
