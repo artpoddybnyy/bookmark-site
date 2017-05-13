@@ -29,8 +29,8 @@ public class BookMarkController {
     String title = urlService.titleExtractor(bookMark.getLink());
     if (title.equals("404")) {
       return new ResponseEntity(HttpStatus.NOT_FOUND);
-    } else
-      bookMark.setTitle(title);
+    }
+    bookMark.setTitle(title);
     bookMarkRepository.save(bookMark);
     return new ResponseEntity(HttpStatus.OK);
   }
@@ -59,12 +59,11 @@ public class BookMarkController {
 
   @RequestMapping(value = "/update-bookmark", method = RequestMethod.PUT)
   public void updateBookMark(@RequestBody BookMark bookMark) {
-
-     bookMark.setBookmarkCategory(category.findOne(bookMark.getCategoryId()));
-
+    if (bookMark.getCategoryId() != null) {
+      bookMark.setBookmarkCategory(category.findOne(bookMark.getCategoryId()));
+    }
     bookMarkRepository.save(bookMark);
   }
-
 
   @RequestMapping(value = "/create-category", method = RequestMethod.POST)
   public void createBookMarksCategory(@RequestBody BookmarksCategory category) {
@@ -73,7 +72,7 @@ public class BookMarkController {
 
   @RequestMapping(value = "/all-category", method = RequestMethod.GET)
   public Iterable<BookmarksCategory> getBookMarksCategory() {
-        return category.findAll();
+    return category.findAll();
   }
 
 }
