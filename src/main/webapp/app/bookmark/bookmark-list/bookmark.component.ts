@@ -66,7 +66,7 @@ export class BookMarkComponent implements OnInit {
 
 
   selected(id:number) {
-    var number = this.ids.indexOf(id);
+    let number = this.ids.indexOf(id);
     if (number > -1) {
       this.ids.splice(number, 1)
     } else {
@@ -82,7 +82,7 @@ export class BookMarkComponent implements OnInit {
   selectAllCheckbox() {
     if (!this.isSelectedAll) {
       this.bookMarks.forEach(bookMark => {
-        var number = this.ids.indexOf(bookMark.id);
+        let number = this.ids.indexOf(bookMark.id);
         if (number >= 0) {
           return true;
         } else {
