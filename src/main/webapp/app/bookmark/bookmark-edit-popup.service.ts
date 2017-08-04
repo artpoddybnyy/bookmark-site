@@ -30,10 +30,10 @@ export class BookMarkPopupService {
     let modalRef = this.modalService.open(component, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.bookMark = bookMark;
     modalRef.result.then(result => {
-      this.router.navigate([{outlets: {popup: null}}], {replaceUrl: true});
+      this.router.navigate([{outlets: {popup: null}}], {replaceUrl: false});
       this.isOpen = false;
     }, (reason) => {
-      this.router.navigate([{outlets: {popup: null}}], {replaceUrl: true});
+      this.router.navigate([{outlets: {popup: null}}], {replaceUrl: false});
       this.isOpen = false;
     });
     return modalRef;

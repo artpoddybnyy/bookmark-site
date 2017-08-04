@@ -1,9 +1,10 @@
 import {Component, OnInit} from "@angular/core";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import {BookMark} from "./bookmark.module";
 import { Observable } from "rxjs/Observable";
 import {BookMarkService} from "../bookmark.service";
 import { EventManager } from 'ng-jhipster';
+import {throttle} from "rxjs/operator/throttle";
 
 @Component({
   selector: "all-bookmarks",
@@ -14,23 +15,28 @@ export class BookMarkComponent implements OnInit {
 
   private ids:number[] = [];
   private bookMarks:Array<BookMark>;
-
+  private title:string;
   private isSelected:boolean;
   private isSelectedAll:boolean;
 
   constructor(private bookMarkService:BookMarkService,
-              private route: ActivatedRoute,
+              private route:ActivatedRoute,
               private eventManager:EventManager) {
   }
 
+
   ngOnInit() {
-    let title = this.route.snapshot.params['title'];
-    if (title!= null){
-      this.findAllByTitle(title);
-      this.detectChangeInFoundBookMarks(title)
-    } else{
-      this.findAll();
-      this.detectChangeInBookMarks();
+    this.route.params.subscribe((params:Params) => {
+      let title = params['title'];
+      if (title != null) {
+        this.findAllByTitle(title);
+        this.detectChangeInFoundBookMarks(title);
+      }
+      this.title = title;
+    });
+    if (this.title == null){
+    this.findAll();
+    this.detectChangeInBookMarks();
     }
   }
 
@@ -40,7 +46,7 @@ export class BookMarkComponent implements OnInit {
       .subscribe(bookMarks => this.bookMarks = bookMarks);
   }
 
-  findAllByTitle(title: string):any {
+  findAllByTitle(title:string):any {
     return this.bookMarkService
       .findAllByTitle(title)
       .subscribe(bookMarks => this.bookMarks = bookMarks);
@@ -60,6 +66,7 @@ export class BookMarkComponent implements OnInit {
     this.ids = [];
     this.isSelectedAll = false;
   }
+
   private onDeleteSuccess() {
     this.eventManager.broadcast({name: 'bookmarkListModification', content: 'OK'});
   }
