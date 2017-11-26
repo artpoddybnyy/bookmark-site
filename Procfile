@@ -1,1 +1,1 @@
-web: java -jar target/bookmarks-site.jar target/*.war
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/bookmarks-site.jar
